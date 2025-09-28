@@ -63,10 +63,43 @@ LDR Features of LDR are as follows:
 
 
 ## PROGRAM:
+// Pin definitions
+const int ldrPin = A0;      // LDR connected to analog pin A0
+const int relayPin = 8;     // Relay (or LED) connected to digital pin 8
+
+// Light threshold (adjust as needed)
+const int threshold = 500;
+
+void setup() {
+  pinMode(relayPin, OUTPUT);   // Set relay pin as OUTPUT
+  digitalWrite(relayPin, LOW); // Start with relay off
+  Serial.begin(9600);          // For debugging
+}
+
+void loop() {
+  int ldrValue = analogRead(ldrPin);  // Read LDR value
+  Serial.println(ldrValue);           // Print value (optional for calibration)
+
+  if (ldrValue < threshold) {
+    // It's dark: turn ON relay/LED
+    digitalWrite(relayPin, HIGH);
+  } else {
+    // It's bright: turn OFF relay/LED
+    digitalWrite(relayPin, LOW);
+  }
+  
+  delay(200); // Delay for stability
+}
+
 
 ## CIRCUIT DIAGRAM:
+<img width="848" height="445" alt="image" src="https://github.com/user-attachments/assets/e3ecf4e0-7f8d-4501-b451-0cf5cd73fea8" />
+
 
 ## OUTPUT:
+![WhatsApp Image 2025-08-30 at 14 10 46_e70eda3a](https://github.com/user-attachments/assets/1d5f17dd-79e0-4ef8-b6ba-7b02f96093ca)
+
+
 
 ## RESULT:
 Thus the automatic light controller was designed and simulated using LDR and Arduino UNO controller.
